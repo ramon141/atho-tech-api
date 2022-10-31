@@ -1,10 +1,10 @@
-import {inject, lifeCycleObserver, LifeCycleObserver} from '@loopback/core';
-import {juggler} from '@loopback/repository';
+import { inject, lifeCycleObserver, LifeCycleObserver } from '@loopback/core';
+import { juggler } from '@loopback/repository';
 
 const config = {
   name: 'mysql',
   connector: 'mysql',
-  url: 'mysql://ramon:12345678@localhost/auth_api',
+  url: 'mysql://sql10530995:IpGWF2lSsL@sql10.freesqldatabase.com/sql10530995',
   host: '',
   port: 0,
   user: '',
@@ -23,7 +23,7 @@ export class MysqlDataSource extends juggler.DataSource
   static readonly defaultConfig = config;
 
   constructor(
-    @inject('datasources.config.mysql', {optional: true})
+    @inject('datasources.config.mysql', { optional: true })
     dsConfig: object = config,
   ) {
     super(dsConfig);

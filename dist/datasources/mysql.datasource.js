@@ -7,7 +7,7 @@ const repository_1 = require("@loopback/repository");
 const config = {
     name: 'mysql',
     connector: 'mysql',
-    url: 'mysql://ramon:12345678@localhost/auth_api',
+    url: 'mysql://sql10530995:IpGWF2lSsL@sql10.freesqldatabase.com/sql10530995',
     host: '',
     port: 0,
     user: '',
