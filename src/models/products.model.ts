@@ -1,7 +1,9 @@
-import {Entity, model, property} from '@loopback/repository';
+import { Entity, model, property, hasMany} from '@loopback/repository';
+import {Configuration} from './configuration.model';
 
 @model()
 export class Products extends Entity {
+
   @property({
     type: 'number',
     id: true,
@@ -15,24 +17,8 @@ export class Products extends Entity {
   })
   description: string;
 
-  @property({
-    type: 'number',
-    required: true,
-    dataType: 'FLOAT'
-  })
-  value: number;
-
-  @property({
-    type: 'number',
-    required: false,
-  })
-  dependsOn: number;
-
-  @property({
-    type: 'number',
-    required: false,
-  })
-  multiplier: number;
+  @hasMany(() => Configuration)
+  configurations: Configuration[];
 
   constructor(data?: Partial<Products>) {
     super(data);

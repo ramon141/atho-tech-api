@@ -39,7 +39,7 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:type", String)
 ], User.prototype, "role", void 0);
 User = tslib_1.__decorate([
-    (0, repository_1.model)({ settings: { strict: false } }),
+    (0, repository_1.model)(),
     tslib_1.__metadata("design:paramtypes", [Object])
 ], User);
 exports.User = User;
