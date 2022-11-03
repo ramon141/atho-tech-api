@@ -3,6 +3,7 @@ import { Configuration } from './configuration.model';
 export declare class Products extends Entity {
     id?: number;
     description: string;
+    default_configuration: number;
     configurations: Configuration[];
     constructor(data?: Partial<Products>);
 }

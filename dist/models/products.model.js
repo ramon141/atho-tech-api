@@ -25,6 +25,13 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:type", String)
 ], Products.prototype, "description", void 0);
 tslib_1.__decorate([
+    (0, repository_1.property)({
+        type: 'number',
+        required: false,
+    }),
+    tslib_1.__metadata("design:type", Number)
+], Products.prototype, "default_configuration", void 0);
+tslib_1.__decorate([
     (0, repository_1.hasMany)(() => configuration_model_1.Configuration),
     tslib_1.__metadata("design:type", Array)
 ], Products.prototype, "configurations", void 0);

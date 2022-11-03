@@ -7,4 +7,5 @@ tslib_1.__exportStar(require("./user.repository"), exports);
 tslib_1.__exportStar(require("./kits.repository"), exports);
 tslib_1.__exportStar(require("./dependency.repository"), exports);
 tslib_1.__exportStar(require("./configuration.repository"), exports);
+tslib_1.__exportStar(require("./budget.repository"), exports);
 //# sourceMappingURL=index.js.map

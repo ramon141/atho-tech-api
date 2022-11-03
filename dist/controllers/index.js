@@ -10,4 +10,5 @@ tslib_1.__exportStar(require("./dependency.controller"), exports);
 tslib_1.__exportStar(require("./configurations.controller"), exports);
 tslib_1.__exportStar(require("./products-configuration.controller"), exports);
 tslib_1.__exportStar(require("./dependency-configuration.controller"), exports);
+tslib_1.__exportStar(require("./budget.controller"), exports);
 //# sourceMappingURL=index.js.map

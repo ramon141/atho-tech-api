@@ -9,3 +9,4 @@ export * from './dependency.controller';
 export * from './configurations.controller';
 export * from './products-configuration.controller';
 export * from './dependency-configuration.controller';
+export * from './budget.controller';

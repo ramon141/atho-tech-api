@@ -1,5 +1,5 @@
-import { Entity, model, property, hasOne, belongsTo} from '@loopback/repository';
-import {Configuration} from './configuration.model';
+import { Entity, model, property, hasOne, belongsTo } from '@loopback/repository';
+import { Configuration } from './configuration.model';
 
 @model()
 export class Dependency extends Entity {
@@ -35,6 +35,7 @@ export class Dependency extends Entity {
   @property({
     type: 'number',
     required: false,
+    dataType: 'FLOAT'
   })
   multiplier: number;
 
