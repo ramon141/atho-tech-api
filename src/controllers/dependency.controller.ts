@@ -1,3 +1,4 @@
+import { authenticate } from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -17,19 +18,20 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {Dependency} from '../models';
-import {DependencyRepository} from '../repositories';
+import { Dependency } from '../models';
+import { DependencyRepository } from '../repositories';
 
+@authenticate('jwt')
 export class DependencyController {
   constructor(
     @repository(DependencyRepository)
-    public dependencyRepository : DependencyRepository,
-  ) {}
+    public dependencyRepository: DependencyRepository,
+  ) { }
 
   @post('/dependencies')
   @response(200, {
     description: 'Dependency model instance',
-    content: {'application/json': {schema: getModelSchemaRef(Dependency)}},
+    content: { 'application/json': { schema: getModelSchemaRef(Dependency) } },
   })
   async create(
     @requestBody({
@@ -50,7 +52,7 @@ export class DependencyController {
   @get('/dependencies/count')
   @response(200, {
     description: 'Dependency model count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async count(
     @param.where(Dependency) where?: Where<Dependency>,
@@ -65,7 +67,7 @@ export class DependencyController {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(Dependency, {includeRelations: true}),
+          items: getModelSchemaRef(Dependency, { includeRelations: true }),
         },
       },
     },
@@ -79,13 +81,13 @@ export class DependencyController {
   @patch('/dependencies')
   @response(200, {
     description: 'Dependency PATCH success count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async updateAll(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Dependency, {partial: true}),
+          schema: getModelSchemaRef(Dependency, { partial: true }),
         },
       },
     })
@@ -100,13 +102,13 @@ export class DependencyController {
     description: 'Dependency model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(Dependency, {includeRelations: true}),
+        schema: getModelSchemaRef(Dependency, { includeRelations: true }),
       },
     },
   })
   async findById(
     @param.path.number('id') id: number,
-    @param.filter(Dependency, {exclude: 'where'}) filter?: FilterExcludingWhere<Dependency>
+    @param.filter(Dependency, { exclude: 'where' }) filter?: FilterExcludingWhere<Dependency>
   ): Promise<Dependency> {
     return this.dependencyRepository.findById(id, filter);
   }
@@ -120,7 +122,7 @@ export class DependencyController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Dependency, {partial: true}),
+          schema: getModelSchemaRef(Dependency, { partial: true }),
         },
       },
     })

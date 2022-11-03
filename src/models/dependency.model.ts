@@ -1,4 +1,5 @@
-import { Entity, model, property } from '@loopback/repository';
+import { Entity, model, property, hasOne, belongsTo} from '@loopback/repository';
+import {Configuration} from './configuration.model';
 
 @model()
 export class Dependency extends Entity {
@@ -13,13 +14,13 @@ export class Dependency extends Entity {
     type: 'number',
     required: true,
   })
-  dependent_product: number;
+  depends_on: number;
 
   @property({
     type: 'string',
     required: true,
     jsonSchema: {
-      enum: ['change_product', 'change_quantity'],
+      enum: ['change_quantity', 'change_configuration'],
     }
   })
   type_dependency: string;
@@ -27,21 +28,9 @@ export class Dependency extends Entity {
   @property({
     type: 'array',
     itemType: 'number',
-    required: true,
-  })
-  condition_quantity: number[]; //relação de quantidade do produto original
-
-  @property({
-    type: 'number',
     required: false,
   })
-  replace_product: number;
-
-  @property({
-    type: 'number',
-    required: false,
-  })
-  to_product: number;
+  condition_quantity: number[];
 
   @property({
     type: 'number',
@@ -49,6 +38,11 @@ export class Dependency extends Entity {
   })
   multiplier: number;
 
+  @hasOne(() => Configuration)
+  configuration: Configuration;
+
+  @belongsTo(() => Configuration)
+  configurationId: number;
 
   constructor(data?: Partial<Dependency>) {
     super(data);

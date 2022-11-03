@@ -1,3 +1,4 @@
+import { authenticate } from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -17,19 +18,20 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {Configuration} from '../models';
-import {ConfigurationRepository} from '../repositories';
+import { Configuration } from '../models';
+import { ConfigurationRepository } from '../repositories';
 
+@authenticate('jwt')
 export class ConfigurationsController {
   constructor(
     @repository(ConfigurationRepository)
-    public configurationRepository : ConfigurationRepository,
-  ) {}
+    public configurationRepository: ConfigurationRepository,
+  ) { }
 
   @post('/configurations')
   @response(200, {
     description: 'Configuration model instance',
-    content: {'application/json': {schema: getModelSchemaRef(Configuration)}},
+    content: { 'application/json': { schema: getModelSchemaRef(Configuration) } },
   })
   async create(
     @requestBody({
@@ -50,7 +52,7 @@ export class ConfigurationsController {
   @get('/configurations/count')
   @response(200, {
     description: 'Configuration model count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async count(
     @param.where(Configuration) where?: Where<Configuration>,
@@ -65,7 +67,7 @@ export class ConfigurationsController {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(Configuration, {includeRelations: true}),
+          items: getModelSchemaRef(Configuration, { includeRelations: true }),
         },
       },
     },
@@ -79,13 +81,13 @@ export class ConfigurationsController {
   @patch('/configurations')
   @response(200, {
     description: 'Configuration PATCH success count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async updateAll(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Configuration, {partial: true}),
+          schema: getModelSchemaRef(Configuration, { partial: true }),
         },
       },
     })
@@ -100,13 +102,13 @@ export class ConfigurationsController {
     description: 'Configuration model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(Configuration, {includeRelations: true}),
+        schema: getModelSchemaRef(Configuration, { includeRelations: true }),
       },
     },
   })
   async findById(
     @param.path.number('id') id: number,
-    @param.filter(Configuration, {exclude: 'where'}) filter?: FilterExcludingWhere<Configuration>
+    @param.filter(Configuration, { exclude: 'where' }) filter?: FilterExcludingWhere<Configuration>
   ): Promise<Configuration> {
     return this.configurationRepository.findById(id, filter);
   }
@@ -120,7 +122,7 @@ export class ConfigurationsController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Configuration, {partial: true}),
+          schema: getModelSchemaRef(Configuration, { partial: true }),
         },
       },
     })

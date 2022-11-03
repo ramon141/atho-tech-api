@@ -1,3 +1,4 @@
+import { authenticate } from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -19,8 +20,9 @@ import {
   Products,
   Configuration,
 } from '../models';
-import {ProductsRepository} from '../repositories';
+import { ProductsRepository } from '../repositories';
 
+@authenticate('jwt')
 export class ProductsConfigurationController {
   constructor(
     @repository(ProductsRepository) protected productsRepository: ProductsRepository,
@@ -32,7 +34,7 @@ export class ProductsConfigurationController {
         description: 'Array of Products has many Configuration',
         content: {
           'application/json': {
-            schema: {type: 'array', items: getModelSchemaRef(Configuration)},
+            schema: { type: 'array', items: getModelSchemaRef(Configuration) },
           },
         },
       },
@@ -49,7 +51,7 @@ export class ProductsConfigurationController {
     responses: {
       '200': {
         description: 'Products model instance',
-        content: {'application/json': {schema: getModelSchemaRef(Configuration)}},
+        content: { 'application/json': { schema: getModelSchemaRef(Configuration) } },
       },
     },
   })
@@ -74,7 +76,7 @@ export class ProductsConfigurationController {
     responses: {
       '200': {
         description: 'Products.Configuration PATCH success count',
-        content: {'application/json': {schema: CountSchema}},
+        content: { 'application/json': { schema: CountSchema } },
       },
     },
   })
@@ -83,7 +85,7 @@ export class ProductsConfigurationController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Configuration, {partial: true}),
+          schema: getModelSchemaRef(Configuration, { partial: true }),
         },
       },
     })
@@ -97,7 +99,7 @@ export class ProductsConfigurationController {
     responses: {
       '200': {
         description: 'Products.Configuration DELETE success count',
-        content: {'application/json': {schema: CountSchema}},
+        content: { 'application/json': { schema: CountSchema } },
       },
     },
   })
