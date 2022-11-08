@@ -18,6 +18,7 @@ export class Configuration extends Entity {
   @property({
     type: 'number',
     required: true,
+    dataType: 'FLOAT'
   })
   value: number;
 

@@ -7,7 +7,7 @@ const repository_1 = require("@loopback/repository");
 const config = {
     name: 'mysql',
     connector: 'mysql',
-    url: 'mysql://sql10530995:IpGWF2lSsL@sql10.freesqldatabase.com/sql10530995',
+    url: 'mysql://bef00af9b06bab:95301feb@us-cdbr-east-06.cleardb.net/heroku_ac1c639e2abede9?reconnect=true',
     host: '',
     port: 0,
     user: '',
