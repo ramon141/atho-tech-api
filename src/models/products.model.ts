@@ -17,12 +17,6 @@ export class Products extends Entity {
   })
   description: string;
 
-  @property({
-    type: 'number',
-    required: false,
-  })
-  default_configuration: number;
-
   @hasMany(() => Configuration)
   configurations: Configuration[];
 
