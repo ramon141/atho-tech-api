@@ -1,4 +1,4 @@
-import {authenticate, TokenService} from '@loopback/authentication';
+import { authenticate, TokenService } from '@loopback/authentication';
 import {
   Credentials,
   MyUserService,
@@ -10,18 +10,18 @@ import {
   User
 } from '../models/user.model';
 
-import {UserRepository} from '../repositories/user.repository';
+import { UserRepository } from '../repositories/user.repository';
 
-import {inject} from '@loopback/core';
-import {model, property, repository} from '@loopback/repository';
+import { inject } from '@loopback/core';
+import { model, property, repository } from '@loopback/repository';
 import {
   get,
   getModelSchemaRef, HttpErrors, post,
   requestBody,
   SchemaObject
 } from '@loopback/rest';
-import {SecurityBindings, securityId, UserProfile} from '@loopback/security';
-import {compareSync, genSalt, hash} from 'bcryptjs';
+import { SecurityBindings, securityId, UserProfile } from '@loopback/security';
+import { compareSync, genSalt, hash } from 'bcryptjs';
 
 @model()
 export class CreateUser extends User {
@@ -51,7 +51,7 @@ export const RequestBody = {
   description: 'The input of login function',
   required: true,
   content: {
-    'application/json': {schema: UserSchema},
+    'application/json': { schema: UserSchema },
   },
 };
 
@@ -61,7 +61,7 @@ export class UserController {
     public jwtService: TokenService,
     @inject(UserServiceBindings.USER_SERVICE)
     public userService: MyUserService,
-    @inject(SecurityBindings.USER, {optional: true})
+    @inject(SecurityBindings.USER, { optional: true })
     public user: UserProfile,
     @repository(UserRepository) protected userRepository: UserRepository,
   ) { }
@@ -96,17 +96,18 @@ export class UserController {
     newUserRequest.name = newUserRequest.name.trim();
     newUserRequest.email = newUserRequest.email.trim();
 
-    try {
-      const {password, ...savedUser} = await this.userRepository.create(newUserRequest);
-      return savedUser;
-    } catch (error) {
-      switch (error.code) {
-        case 'ER_DUP_ENTRY':
-          throw new HttpErrors.UnprocessableEntity('O Usuário já existe');
-        default:
-          new HttpErrors.UnprocessableEntity('Um erro desconhecido ocorreu');
+    const exists = await this.userRepository.findOne({
+      where: {
+        email: newUserRequest.email
       }
+    });
+
+    if (!!exists) {
+      throw new HttpErrors.UnprocessableEntity('O Usuário já existe');
     }
+
+    const { password, ...savedUser } = await this.userRepository.create(newUserRequest);
+    return savedUser;
   }
 
   @post('/login', {
@@ -131,7 +132,7 @@ export class UserController {
 
   async signIn(
     @requestBody(RequestBody) credentials: Credentials,
-  ): Promise<{token: string}> {
+  ): Promise<{ token: string, role: string, name: string, email: string }> {
     const user = await this.userRepository.findById(credentials.email);
 
     if (!compareSync(credentials.password, user.password))
@@ -139,12 +140,16 @@ export class UserController {
 
     const userProfile = {
       [securityId]: user.email!.toString(),
-      name: user.name,
-      permission: user.role
+      name: user.name
     };
 
     const token = await this.jwtService.generateToken(userProfile);
-    return {token};
+    return {
+      token,
+      role: user.role,
+      name: user.name,
+      email: user.email
+    };
   }
 
   @authenticate('jwt')

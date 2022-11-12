@@ -27,9 +27,12 @@ export declare class UserController {
         email: string;
         name: string;
         role: string;
-    } | undefined>;
+    }>;
     signIn(credentials: Credentials): Promise<{
         token: string;
+        role: string;
+        name: string;
+        email: string;
     }>;
     whoAmI(loggedInUserProfile: UserProfile): Promise<string>;
 }

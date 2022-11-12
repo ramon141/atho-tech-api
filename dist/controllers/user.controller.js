@@ -57,18 +57,16 @@ let UserController = class UserController {
         newUserRequest.role = 'Vendedor';
         newUserRequest.name = newUserRequest.name.trim();
         newUserRequest.email = newUserRequest.email.trim();
-        try {
-            const { password, ...savedUser } = await this.userRepository.create(newUserRequest);
-            return savedUser;
-        }
-        catch (error) {
-            switch (error.code) {
-                case 'ER_DUP_ENTRY':
-                    throw new rest_1.HttpErrors.UnprocessableEntity('O Usuário já existe');
-                default:
-                    new rest_1.HttpErrors.UnprocessableEntity('Um erro desconhecido ocorreu');
+        const exists = await this.userRepository.findOne({
+            where: {
+                email: newUserRequest.email
             }
+        });
+        if (!!exists) {
+            throw new rest_1.HttpErrors.UnprocessableEntity('O Usuário já existe');
         }
+        const { password, ...savedUser } = await this.userRepository.create(newUserRequest);
+        return savedUser;
     }
     async signIn(credentials) {
         const user = await this.userRepository.findById(credentials.email);
@@ -76,11 +74,15 @@ let UserController = class UserController {
             throw new rest_1.HttpErrors[401]('E-mail ou senha inválido(s)');
         const userProfile = {
             [security_1.securityId]: user.email.toString(),
-            name: user.name,
-            permission: user.role
+            name: user.name
         };
         const token = await this.jwtService.generateToken(userProfile);
-        return { token };
+        return {
+            token,
+            role: user.role,
+            name: user.name,
+            email: user.email
+        };
     }
     async whoAmI(loggedInUserProfile) {
         return loggedInUserProfile[security_1.securityId];
