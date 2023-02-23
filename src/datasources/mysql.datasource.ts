@@ -4,7 +4,7 @@ import { juggler } from '@loopback/repository';
 const config = {
   name: 'mysql',
   connector: 'mysql',
-  url: 'mysql://bc3ec812b390dd:d3761a28@us-cdbr-east-06.cleardb.net/heroku_ba8c8016a760428?reconnect=true',
+  url: 'mysql://root:lTkp4RKBJqswOQzQTUR2@containers-us-west-176.railway.app:6201/railway',
   host: '',
   port: 0,
   user: '',
