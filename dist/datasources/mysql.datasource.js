@@ -6,8 +6,8 @@ const core_1 = require("@loopback/core");
 const repository_1 = require("@loopback/repository");
 const config = {
     name: 'mysql',
-    connector: 'mysql',
-    url: 'mysql://bef00af9b06bab:95301feb@us-cdbr-east-06.cleardb.net/heroku_ac1c639e2abede9?reconnect=true',
+    connector: 'postgres',
+    url: 'postgresql://postgres:9YCK7weev0jLQo8gzZqw@containers-us-west-43.railway.app:6008/railway',
     host: '',
     port: 0,
     user: '',
