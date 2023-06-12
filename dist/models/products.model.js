@@ -15,7 +15,7 @@ tslib_1.__decorate([
         id: true,
         generated: true,
     }),
-    tslib_1.__metadata("design:type", Number)
+    tslib_1.__metadata("design:type", String)
 ], Products.prototype, "id", void 0);
 tslib_1.__decorate([
     (0, repository_1.property)({
@@ -28,6 +28,12 @@ tslib_1.__decorate([
     (0, repository_1.hasMany)(() => configuration_model_1.Configuration),
     tslib_1.__metadata("design:type", Array)
 ], Products.prototype, "configurations", void 0);
+tslib_1.__decorate([
+    (0, repository_1.property)({
+        type: 'string',
+    }),
+    tslib_1.__metadata("design:type", String)
+], Products.prototype, "enterpriseId", void 0);
 Products = tslib_1.__decorate([
     (0, repository_1.model)(),
     tslib_1.__metadata("design:paramtypes", [Object])

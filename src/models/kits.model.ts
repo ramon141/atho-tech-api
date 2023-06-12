@@ -7,7 +7,7 @@ export class Kits extends Entity {
     id: true,
     generated: true,
   })
-  id?: number;
+  id?: string;
 
   @property({
     type: 'string',
@@ -21,6 +21,11 @@ export class Kits extends Entity {
     required: true,
   })
   products: object[];
+
+  @property({
+    type: 'string',
+  })
+  enterpriseId?: string;
 
   constructor(data?: Partial<Kits>) {
     super(data);

@@ -41,7 +41,7 @@ export class ProductsConfigurationController {
     },
   })
   async find(
-    @param.path.number('id') id: number,
+    @param.path.string('id') id: string,
     @param.query.object('filter') filter?: Filter<Configuration>,
   ): Promise<Configuration[]> {
     return this.productsRepository.configurations(id).find(filter);
@@ -56,7 +56,7 @@ export class ProductsConfigurationController {
     },
   })
   async create(
-    @param.path.number('id') id: typeof Products.prototype.id,
+    @param.path.string('id') id: typeof Products.prototype.id,
     @requestBody({
       content: {
         'application/json': {
@@ -81,7 +81,7 @@ export class ProductsConfigurationController {
     },
   })
   async patch(
-    @param.path.number('id') id: number,
+    @param.path.string('id') id: string,
     @requestBody({
       content: {
         'application/json': {
@@ -104,7 +104,7 @@ export class ProductsConfigurationController {
     },
   })
   async delete(
-    @param.path.number('id') id: number,
+    @param.path.string('id') id: string,
     @param.query.object('where', getWhereSchemaFor(Configuration)) where?: Where<Configuration>,
   ): Promise<Count> {
     return this.productsRepository.configurations(id).delete(where);

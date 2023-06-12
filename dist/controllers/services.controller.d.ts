@@ -8,8 +8,8 @@ export declare class ServicesController {
     count(where?: Where<Services>): Promise<Count>;
     find(filter?: Filter<Services>): Promise<Services[]>;
     updateAll(services: Services, where?: Where<Services>): Promise<Count>;
-    findById(id: number, filter?: FilterExcludingWhere<Services>): Promise<Services>;
-    updateById(id: number, services: Services): Promise<void>;
-    replaceById(id: number, services: Services): Promise<void>;
-    deleteById(id: number): Promise<void>;
+    findById(id: string, filter?: FilterExcludingWhere<Services>): Promise<Services>;
+    updateById(id: string, services: Services): Promise<void>;
+    replaceById(id: string, services: Services): Promise<void>;
+    deleteById(id: string): Promise<void>;
 }

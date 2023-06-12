@@ -33,7 +33,7 @@ export class DependencyConfigurationController {
     },
   })
   async getConfiguration(
-    @param.path.number('id') id: typeof Dependency.prototype.id,
+    @param.path.string('id') id: typeof Dependency.prototype.id,
   ): Promise<Configuration> {
     return this.dependencyRepository.configuration(id);
   }

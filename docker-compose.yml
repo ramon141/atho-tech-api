@@ -1,0 +1,48 @@
+version: "3" ## especifica a versão do docker-compose file
+
+services:
+  mongo-db-athotech:
+    image: mongo
+    container_name: mongo-db-athotech
+    ports:
+      - "27017:27017"
+    networks:
+      - dev-athotech
+
+  mongo-seed-athotech:
+    build: ./mongo-seed
+    depends_on:
+      - mongo-db-athotech
+    networks:
+      - dev-athotech
+    env_file:
+      - .env
+    
+
+  mongo-express-athotech:
+    image: mongo-express
+    restart: always
+    depends_on:
+      - mongo-db-athotech
+    ports:
+      - 8082:8081
+    env_file:
+      - .env
+    environment:
+      ME_CONFIG_MONGODB_URL: ${MONGO_URL}
+
+  atho-tech-dev:
+    image: athotech:dev
+    container_name: athotech-dev-container
+    depends_on:
+      - mongo-db-athotech
+    build: .
+    ports:
+      - ${PORT}:${PORT}
+    env_file:
+      - .env
+
+networks:
+  dev-athotech:
+    name: dev-athotech
+    driver: bridge

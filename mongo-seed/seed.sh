@@ -1,0 +1,1 @@
+mongoimport --host $IP_DOCKER --db athotech --collection User --type json --file /User.json --jsonArray

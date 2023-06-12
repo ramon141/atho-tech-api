@@ -1,4 +1,4 @@
-import {authenticate} from '@loopback/authentication';
+import { authenticate } from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -12,8 +12,8 @@ import {
   getModelSchemaRef, param, patch, post, put, requestBody,
   response
 } from '@loopback/rest';
-import {Services} from '../models';
-import {ServicesRepository} from '../repositories';
+import { Services } from '../models';
+import { ServicesRepository } from '../repositories';
 
 @authenticate('jwt')
 export class ServicesController {
@@ -25,7 +25,7 @@ export class ServicesController {
   @post('/services')
   @response(200, {
     description: 'Services model instance',
-    content: {'application/json': {schema: getModelSchemaRef(Services)}},
+    content: { 'application/json': { schema: getModelSchemaRef(Services) } },
   })
   async create(
     @requestBody({
@@ -46,7 +46,7 @@ export class ServicesController {
   @get('/services/count')
   @response(200, {
     description: 'Services model count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async count(
     @param.where(Services) where?: Where<Services>,
@@ -61,7 +61,7 @@ export class ServicesController {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(Services, {includeRelations: true}),
+          items: getModelSchemaRef(Services, { includeRelations: true }),
         },
       },
     },
@@ -75,13 +75,13 @@ export class ServicesController {
   @patch('/services')
   @response(200, {
     description: 'Services PATCH success count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async updateAll(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Services, {partial: true}),
+          schema: getModelSchemaRef(Services, { partial: true }),
         },
       },
     })
@@ -96,13 +96,13 @@ export class ServicesController {
     description: 'Services model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(Services, {includeRelations: true}),
+        schema: getModelSchemaRef(Services, { includeRelations: true }),
       },
     },
   })
   async findById(
-    @param.path.number('id') id: number,
-    @param.filter(Services, {exclude: 'where'}) filter?: FilterExcludingWhere<Services>
+    @param.path.string('id') id: string,
+    @param.filter(Services, { exclude: 'where' }) filter?: FilterExcludingWhere<Services>
   ): Promise<Services> {
     return this.servicesRepository.findById(id, filter);
   }
@@ -112,11 +112,11 @@ export class ServicesController {
     description: 'Services PATCH success',
   })
   async updateById(
-    @param.path.number('id') id: number,
+    @param.path.string('id') id: string,
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Services, {partial: true}),
+          schema: getModelSchemaRef(Services, { partial: true }),
         },
       },
     })
@@ -130,7 +130,7 @@ export class ServicesController {
     description: 'Services PUT success',
   })
   async replaceById(
-    @param.path.number('id') id: number,
+    @param.path.string('id') id: string,
     @requestBody() services: Services,
   ): Promise<void> {
     await this.servicesRepository.replaceById(id, services);
@@ -140,7 +140,7 @@ export class ServicesController {
   @response(204, {
     description: 'Services DELETE success',
   })
-  async deleteById(@param.path.number('id') id: number): Promise<void> {
+  async deleteById(@param.path.string('id') id: string): Promise<void> {
     await this.servicesRepository.deleteById(id);
   }
 }

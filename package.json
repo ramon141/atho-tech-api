@@ -35,7 +35,6 @@
     "start:dev": "node -r source-map-support/register .",
     "clean": "lb-clean dist *.tsbuildinfo .eslintcache",
     "rebuild": "npm run clean && npm run build",
-    "postinstall": "npm run build",
     "start": "node dist/index.js"
   },
   "repository": {
@@ -61,6 +60,7 @@
     "@loopback/rest-explorer": "^5.0.4",
     "@loopback/security": "^0.8.4",
     "@loopback/service-proxy": "^5.0.4",
+    "loopback-connector-mongodb": "^7.0.0-alpha.1",
     "loopback-connector-postgresql": "^6.0.2",
     "postgres": "^3.3.3",
     "tslib": "^2.0.0"

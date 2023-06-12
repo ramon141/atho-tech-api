@@ -113,10 +113,10 @@ tslib_1.__decorate([
             },
         },
     }),
-    tslib_1.__param(0, rest_1.param.path.number('id')),
+    tslib_1.__param(0, rest_1.param.path.string('id')),
     tslib_1.__param(1, rest_1.param.filter(models_1.Services, { exclude: 'where' })),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Number, Object]),
+    tslib_1.__metadata("design:paramtypes", [String, Object]),
     tslib_1.__metadata("design:returntype", Promise)
 ], ServicesController.prototype, "findById", null);
 tslib_1.__decorate([
@@ -124,7 +124,7 @@ tslib_1.__decorate([
     (0, rest_1.response)(204, {
         description: 'Services PATCH success',
     }),
-    tslib_1.__param(0, rest_1.param.path.number('id')),
+    tslib_1.__param(0, rest_1.param.path.string('id')),
     tslib_1.__param(1, (0, rest_1.requestBody)({
         content: {
             'application/json': {
@@ -133,7 +133,7 @@ tslib_1.__decorate([
         },
     })),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Number, models_1.Services]),
+    tslib_1.__metadata("design:paramtypes", [String, models_1.Services]),
     tslib_1.__metadata("design:returntype", Promise)
 ], ServicesController.prototype, "updateById", null);
 tslib_1.__decorate([
@@ -141,10 +141,10 @@ tslib_1.__decorate([
     (0, rest_1.response)(204, {
         description: 'Services PUT success',
     }),
-    tslib_1.__param(0, rest_1.param.path.number('id')),
+    tslib_1.__param(0, rest_1.param.path.string('id')),
     tslib_1.__param(1, (0, rest_1.requestBody)()),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Number, models_1.Services]),
+    tslib_1.__metadata("design:paramtypes", [String, models_1.Services]),
     tslib_1.__metadata("design:returntype", Promise)
 ], ServicesController.prototype, "replaceById", null);
 tslib_1.__decorate([
@@ -152,9 +152,9 @@ tslib_1.__decorate([
     (0, rest_1.response)(204, {
         description: 'Services DELETE success',
     }),
-    tslib_1.__param(0, rest_1.param.path.number('id')),
+    tslib_1.__param(0, rest_1.param.path.string('id')),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Number]),
+    tslib_1.__metadata("design:paramtypes", [String]),
     tslib_1.__metadata("design:returntype", Promise)
 ], ServicesController.prototype, "deleteById", null);
 ServicesController = tslib_1.__decorate([

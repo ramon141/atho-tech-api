@@ -5,7 +5,7 @@ export declare class MysqlDataSource extends juggler.DataSource implements LifeC
     static readonly defaultConfig: {
         name: string;
         connector: string;
-        url: string;
+        url: string | undefined;
         host: string;
         port: number;
         user: string;

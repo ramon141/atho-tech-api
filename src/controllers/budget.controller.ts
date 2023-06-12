@@ -17,19 +17,19 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {Budget} from '../models';
-import {BudgetRepository} from '../repositories';
+import { Budget } from '../models';
+import { BudgetRepository } from '../repositories';
 
 export class BudgetController {
   constructor(
     @repository(BudgetRepository)
-    public budgetRepository : BudgetRepository,
-  ) {}
+    public budgetRepository: BudgetRepository,
+  ) { }
 
   @post('/budgets')
   @response(200, {
     description: 'Budget model instance',
-    content: {'application/json': {schema: getModelSchemaRef(Budget)}},
+    content: { 'application/json': { schema: getModelSchemaRef(Budget) } },
   })
   async create(
     @requestBody({
@@ -50,7 +50,7 @@ export class BudgetController {
   @get('/budgets/count')
   @response(200, {
     description: 'Budget model count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async count(
     @param.where(Budget) where?: Where<Budget>,
@@ -65,7 +65,7 @@ export class BudgetController {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(Budget, {includeRelations: true}),
+          items: getModelSchemaRef(Budget, { includeRelations: true }),
         },
       },
     },
@@ -79,13 +79,13 @@ export class BudgetController {
   @patch('/budgets')
   @response(200, {
     description: 'Budget PATCH success count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async updateAll(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Budget, {partial: true}),
+          schema: getModelSchemaRef(Budget, { partial: true }),
         },
       },
     })
@@ -100,13 +100,13 @@ export class BudgetController {
     description: 'Budget model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(Budget, {includeRelations: true}),
+        schema: getModelSchemaRef(Budget, { includeRelations: true }),
       },
     },
   })
   async findById(
-    @param.path.number('id') id: number,
-    @param.filter(Budget, {exclude: 'where'}) filter?: FilterExcludingWhere<Budget>
+    @param.path.string('id') id: string,
+    @param.filter(Budget, { exclude: 'where' }) filter?: FilterExcludingWhere<Budget>
   ): Promise<Budget> {
     return this.budgetRepository.findById(id, filter);
   }
@@ -116,11 +116,11 @@ export class BudgetController {
     description: 'Budget PATCH success',
   })
   async updateById(
-    @param.path.number('id') id: number,
+    @param.path.string('id') id: string,
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Budget, {partial: true}),
+          schema: getModelSchemaRef(Budget, { partial: true }),
         },
       },
     })
@@ -134,7 +134,7 @@ export class BudgetController {
     description: 'Budget PUT success',
   })
   async replaceById(
-    @param.path.number('id') id: number,
+    @param.path.string('id') id: string,
     @requestBody() budget: Budget,
   ): Promise<void> {
     await this.budgetRepository.replaceById(id, budget);
@@ -144,7 +144,7 @@ export class BudgetController {
   @response(204, {
     description: 'Budget DELETE success',
   })
-  async deleteById(@param.path.number('id') id: number): Promise<void> {
+  async deleteById(@param.path.string('id') id: string): Promise<void> {
     await this.budgetRepository.deleteById(id);
   }
 }

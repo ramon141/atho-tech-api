@@ -14,7 +14,7 @@ tslib_1.__decorate([
         id: true,
         generated: true,
     }),
-    tslib_1.__metadata("design:type", Number)
+    tslib_1.__metadata("design:type", String)
 ], Services.prototype, "id", void 0);
 tslib_1.__decorate([
     (0, repository_1.property)({
@@ -31,6 +31,12 @@ tslib_1.__decorate([
     }),
     tslib_1.__metadata("design:type", Number)
 ], Services.prototype, "value", void 0);
+tslib_1.__decorate([
+    (0, repository_1.property)({
+        type: 'string',
+    }),
+    tslib_1.__metadata("design:type", String)
+], Services.prototype, "enterpriseId", void 0);
 Services = tslib_1.__decorate([
     (0, repository_1.model)(),
     tslib_1.__metadata("design:paramtypes", [Object])

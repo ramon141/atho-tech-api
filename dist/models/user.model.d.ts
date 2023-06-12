@@ -4,6 +4,7 @@ export declare class User extends Entity {
     password: string;
     name: string;
     role: string;
+    enterpriseId?: string;
     [prop: string]: any;
     constructor(data?: Partial<User>);
 }

@@ -2,9 +2,9 @@ import { inject, lifeCycleObserver, LifeCycleObserver } from '@loopback/core';
 import { juggler } from '@loopback/repository';
 
 const config = {
-  name: 'mysql',
-  connector: 'postgresql',
-  url: 'postgresql://postgres:y0UHhA768fsEpgcDF833@containers-us-west-159.railway.app:5531/railway',
+  name: 'mongodb',
+  connector: 'mongodb',
+  url: process.env.MONGO_URL,
   host: '',
   port: 0,
   user: '',

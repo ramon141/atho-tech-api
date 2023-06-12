@@ -107,7 +107,7 @@ export class DependencyController {
     },
   })
   async findById(
-    @param.path.number('id') id: number,
+    @param.path.string('id') id: string,
     @param.filter(Dependency, { exclude: 'where' }) filter?: FilterExcludingWhere<Dependency>
   ): Promise<Dependency> {
     return this.dependencyRepository.findById(id, filter);
@@ -118,7 +118,7 @@ export class DependencyController {
     description: 'Dependency PATCH success',
   })
   async updateById(
-    @param.path.number('id') id: number,
+    @param.path.string('id') id: string,
     @requestBody({
       content: {
         'application/json': {
@@ -136,7 +136,7 @@ export class DependencyController {
     description: 'Dependency PUT success',
   })
   async replaceById(
-    @param.path.number('id') id: number,
+    @param.path.string('id') id: string,
     @requestBody() dependency: Dependency,
   ): Promise<void> {
     await this.dependencyRepository.replaceById(id, dependency);
@@ -146,7 +146,7 @@ export class DependencyController {
   @response(204, {
     description: 'Dependency DELETE success',
   })
-  async deleteById(@param.path.number('id') id: number): Promise<void> {
+  async deleteById(@param.path.string('id') id: string): Promise<void> {
     await this.dependencyRepository.deleteById(id);
   }
 }

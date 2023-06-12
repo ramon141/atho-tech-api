@@ -8,7 +8,7 @@ export class Dependency extends Entity {
     id: true,
     generated: true,
   })
-  id?: number;
+  id?: string;
 
   @property({
     type: 'number',

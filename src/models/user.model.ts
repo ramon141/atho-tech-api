@@ -28,6 +28,10 @@ export class User extends Entity {
   })
   role: string;
 
+  @property({
+    type: 'string',
+  })
+  enterpriseId?: string;
   // Define well-known properties here
 
   // Indexer property to allow additional data

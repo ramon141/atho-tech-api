@@ -27,6 +27,7 @@ export declare class UserController {
         email: string;
         name: string;
         role: string;
+        enterpriseId?: string | undefined;
     }>;
     signIn(credentials: Credentials): Promise<{
         token: string;

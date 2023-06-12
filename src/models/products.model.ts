@@ -9,7 +9,7 @@ export class Products extends Entity {
     id: true,
     generated: true,
   })
-  id?: number;
+  id?: string;
 
   @property({
     type: 'string',
@@ -19,6 +19,11 @@ export class Products extends Entity {
 
   @hasMany(() => Configuration)
   configurations: Configuration[];
+
+  @property({
+    type: 'string',
+  })
+  enterpriseId?: string;
 
   constructor(data?: Partial<Products>) {
     super(data);

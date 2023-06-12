@@ -1,8 +1,9 @@
 import { Entity } from '@loopback/repository';
 export declare class Services extends Entity {
-    id?: number;
+    id?: string;
     description: string;
     value: number;
+    enterpriseId?: string;
     constructor(data?: Partial<Services>);
 }
 export interface ServicesRelations {

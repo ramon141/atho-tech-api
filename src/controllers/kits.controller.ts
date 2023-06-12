@@ -107,7 +107,7 @@ export class KitsController {
     },
   })
   async findById(
-    @param.path.number('id') id: number,
+    @param.path.string('id') id: string,
     @param.filter(Kits, { exclude: 'where' }) filter?: FilterExcludingWhere<Kits>
   ): Promise<Kits> {
     return this.kitsRepository.findById(id, filter);
@@ -118,7 +118,7 @@ export class KitsController {
     description: 'Kits PATCH success',
   })
   async updateById(
-    @param.path.number('id') id: number,
+    @param.path.string('id') id: string,
     @requestBody({
       content: {
         'application/json': {
@@ -136,7 +136,7 @@ export class KitsController {
     description: 'Kits PUT success',
   })
   async replaceById(
-    @param.path.number('id') id: number,
+    @param.path.string('id') id: string,
     @requestBody() kits: Kits,
   ): Promise<void> {
     await this.kitsRepository.replaceById(id, kits);
@@ -146,7 +146,7 @@ export class KitsController {
   @response(204, {
     description: 'Kits DELETE success',
   })
-  async deleteById(@param.path.number('id') id: number): Promise<void> {
+  async deleteById(@param.path.string('id') id: string): Promise<void> {
     await this.kitsRepository.deleteById(id);
   }
 }

@@ -107,7 +107,7 @@ export class ConfigurationsController {
     },
   })
   async findById(
-    @param.path.number('id') id: number,
+    @param.path.string('id') id: string,
     @param.filter(Configuration, { exclude: 'where' }) filter?: FilterExcludingWhere<Configuration>
   ): Promise<Configuration> {
     return this.configurationRepository.findById(id, filter);
@@ -118,7 +118,7 @@ export class ConfigurationsController {
     description: 'Configuration PATCH success',
   })
   async updateById(
-    @param.path.number('id') id: number,
+    @param.path.string('id') id: string,
     @requestBody({
       content: {
         'application/json': {
@@ -136,7 +136,7 @@ export class ConfigurationsController {
     description: 'Configuration PUT success',
   })
   async replaceById(
-    @param.path.number('id') id: number,
+    @param.path.string('id') id: string,
     @requestBody() configuration: Configuration,
   ): Promise<void> {
     await this.configurationRepository.replaceById(id, configuration);
@@ -146,7 +146,7 @@ export class ConfigurationsController {
   @response(204, {
     description: 'Configuration DELETE success',
   })
-  async deleteById(@param.path.number('id') id: number): Promise<void> {
+  async deleteById(@param.path.string('id') id: string): Promise<void> {
     await this.configurationRepository.deleteById(id);
   }
 }

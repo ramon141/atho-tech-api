@@ -5,9 +5,9 @@ const tslib_1 = require("tslib");
 const core_1 = require("@loopback/core");
 const repository_1 = require("@loopback/repository");
 const config = {
-    name: 'mysql',
-    connector: 'postgresql',
-    url: 'postgresql://postgres:9YCK7weev0jLQo8gzZqw@containers-us-west-43.railway.app:6008/railway',
+    name: 'mongodb',
+    connector: 'mongodb',
+    url: process.env.MONGO_URL,
     host: '',
     port: 0,
     user: '',
