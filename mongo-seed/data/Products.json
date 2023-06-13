@@ -1,0 +1,46 @@
+[{
+  "_id": {
+    "$oid": "6488782f2c72573d1ba98b65"
+  },
+  "description": "CÂMERA HILOOK THC-B12OC 2.8MM"
+},{
+  "_id": {
+    "$oid": "648878432c72573d1ba98b67"
+  },
+  "description": "CABO COAXIAL BIPOLAR 60% MALHA 100M2X24"
+},{
+  "_id": {
+    "$oid": "6488784f2c72573d1ba98b69"
+  },
+  "description": "CAIXA SOBREPOR QUADRADA BRANCA"
+},{
+  "_id": {
+    "$oid": "648878c62c72573d1ba98b6b"
+  },
+  "description": "CONECTOR BNC MACHOBORNE - AVULSO"
+},{
+  "_id": {
+    "$oid": "648878d32c72573d1ba98b6d"
+  },
+  "description": "CONECTOR BNC MOLA 6MM - UN"
+},{
+  "_id": {
+    "$oid": "648878df2c72573d1ba98b6f"
+  },
+  "description": "CONECTOR P4 MACHO - AVULSO"
+},{
+  "_id": {
+    "$oid": "648879062c72573d1ba98b71"
+  },
+  "description": "CABO ELÉTRICO 2,5"
+},{
+  "_id": {
+    "$oid": "6488790e2c72573d1ba98b73"
+  },
+  "description": "CABO LAN CAT5E CMX AZUL 305M WEC"
+},{
+  "_id": {
+    "$oid": "648879182c72573d1ba98b75"
+  },
+  "description": "PLUGUE FEMEA 2P PRETO/BRANCO"
+}]

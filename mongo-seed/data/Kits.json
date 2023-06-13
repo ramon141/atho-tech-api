@@ -1,0 +1,47 @@
+[{
+  "_id": {
+    "$oid": "6488a6bd020bbf20e7ef7fe1"
+  },
+  "name": "4 Cameras",
+  "products": [
+    {
+      "id": "6488782f2c72573d1ba98b66",
+      "quantity": 4
+    },
+    {
+      "id": "648878432c72573d1ba98b68",
+      "quantity": 4
+    },
+    {
+      "id": "6488784f2c72573d1ba98b6a",
+      "quantity": 4
+    },
+    {
+      "id": "648878c62c72573d1ba98b6c",
+      "quantity": 4
+    },
+    {
+      "id": "648878d32c72573d1ba98b6e",
+      "quantity": 4
+    },
+    {
+      "id": "648878df2c72573d1ba98b70",
+      "quantity": 4
+    },
+    {
+      "id": "648879062c72573d1ba98b72",
+      "quantity": 4
+    },
+    {
+      "id": "6488790e2c72573d1ba98b74",
+      "quantity": 4
+    },
+    {
+      "id": "648879182c72573d1ba98b76",
+      "quantity": 4
+    }
+  ],
+  "enterpriseId": {
+    "$oid": "6488a5a5020bbf20e7ef7fe0"
+  }
+}]

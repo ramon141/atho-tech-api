@@ -6,6 +6,7 @@ import {
   repository,
   Where,
 } from '@loopback/repository';
+import { authenticate, TokenService } from '@loopback/authentication';
 import {
   post,
   param,
@@ -16,12 +17,48 @@ import {
   del,
   requestBody,
   response,
+  HttpErrors,
+  SchemaObject
 } from '@loopback/rest';
 import { Enterprise } from '../models';
 import { EnterpriseRepository } from '../repositories';
+import {
+  Credentials,
+  MyUserService,
+  TokenServiceBindings,
+  UserServiceBindings
+} from '@loopback/authentication-jwt';
+import { compareSync, genSalt, hash } from 'bcryptjs';
+import { SecurityBindings, securityId, UserProfile } from '@loopback/security';
+import { inject } from '@loopback/core';
+
+const EnterpriseSchema: SchemaObject = {
+  type: 'object',
+  required: ['email', 'password'],
+  properties: {
+    email: {
+      type: 'string',
+      format: 'email',
+    },
+    password: {
+      type: 'string',
+      minLength: 6,
+    },
+  },
+};
+
+export const EnterpriseRequestBody = {
+  description: 'The input of login function',
+  required: true,
+  content: {
+    'application/json': { schema: EnterpriseSchema },
+  },
+};
 
 export class EnterpriseController {
   constructor(
+    @inject(TokenServiceBindings.TOKEN_SERVICE)
+    public jwtService: TokenService,
     @repository(EnterpriseRepository)
     public enterpriseRepository: EnterpriseRepository,
   ) { }
@@ -138,6 +175,51 @@ export class EnterpriseController {
     @requestBody() enterprise: Enterprise,
   ): Promise<void> {
     await this.enterpriseRepository.replaceById(id, enterprise);
+  }
+
+  @post('/enterprise/login', {
+    responses: {
+      '200': {
+        description: 'Token',
+        content: {
+          'application/json': {
+            schema: {
+              type: 'object',
+              properties: {
+                token: {
+                  type: 'string',
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  })
+  async signIn(
+    @requestBody(EnterpriseRequestBody) credentials: Credentials,
+  ): Promise<{ token: string, name: string, email: string }> {
+
+    const user = await this.enterpriseRepository.findOne({
+      where: {
+        email: credentials.email
+      }
+    });
+
+    if (!user?.password || credentials.password != user.password)
+      throw new HttpErrors[401]('E-mail ou senha inválido(s)');
+
+    const userProfile = {
+      [securityId]: user.email!.toString(),
+      name: user.name
+    };
+
+    const token = await this.jwtService.generateToken(userProfile);
+    return {
+      token,
+      name: user.name,
+      email: user.email
+    };
   }
 
   @del('/enterprises/{id}')

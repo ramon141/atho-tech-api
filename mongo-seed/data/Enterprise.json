@@ -1,0 +1,22 @@
+[{
+  "_id": {
+    "$oid": "6488a5a5020bbf20e7ef7fe0"
+  },
+  "email": "empresa@gmail.com",
+  "password": "123456789",
+  "name": "Empresa"
+},{
+  "_id": {
+    "$oid": "6488b4b6de2aa3df091eb837"
+  },
+  "email": "admin@gmail.com",
+  "password": "12345678",
+  "name": "Nome da empresa"
+},{
+  "_id": {
+    "$oid": "6488f4c984d5784809160070"
+  },
+  "email": "ijiji@gmail.com",
+  "password": "12345678",
+  "name": "trtyui"
+}]

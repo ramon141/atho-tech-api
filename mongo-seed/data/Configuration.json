@@ -1,0 +1,82 @@
+[{
+  "_id": {
+    "$oid": "6488782f2c72573d1ba98b66"
+  },
+  "description": " ",
+  "value": 222.38,
+  "productsId": {
+    "$oid": "6488782f2c72573d1ba98b65"
+  }
+},{
+  "_id": {
+    "$oid": "648878432c72573d1ba98b68"
+  },
+  "description": " ",
+  "value": 161.12,
+  "productsId": {
+    "$oid": "648878432c72573d1ba98b67"
+  }
+},{
+  "_id": {
+    "$oid": "6488784f2c72573d1ba98b6a"
+  },
+  "description": " ",
+  "value": 7.28,
+  "productsId": {
+    "$oid": "6488784f2c72573d1ba98b69"
+  }
+},{
+  "_id": {
+    "$oid": "648878c62c72573d1ba98b6c"
+  },
+  "description": " ",
+  "value": 2.46,
+  "productsId": {
+    "$oid": "648878c62c72573d1ba98b6b"
+  }
+},{
+  "_id": {
+    "$oid": "648878d32c72573d1ba98b6e"
+  },
+  "description": " ",
+  "value": 2.3,
+  "productsId": {
+    "$oid": "648878d32c72573d1ba98b6d"
+  }
+},{
+  "_id": {
+    "$oid": "648878df2c72573d1ba98b70"
+  },
+  "description": " ",
+  "value": 2,
+  "productsId": {
+    "$oid": "648878df2c72573d1ba98b6f"
+  }
+},{
+  "_id": {
+    "$oid": "648879062c72573d1ba98b72"
+  },
+  "description": " ",
+  "value": 4.29,
+  "productsId": {
+    "$oid": "648879062c72573d1ba98b71"
+  }
+},{
+  "_id": {
+    "$oid": "6488790e2c72573d1ba98b74"
+  },
+  "description": " ",
+  "value": 3.5,
+  "productsId": {
+    "$oid": "6488790e2c72573d1ba98b73"
+  }
+},{
+  "_id": {
+    "$oid": "648879182c72573d1ba98b76"
+  },
+  "description": " ",
+  "value": 14.85,
+  "productsId": {
+    "$oid": "648879182c72573d1ba98b75"
+  }
+}]
