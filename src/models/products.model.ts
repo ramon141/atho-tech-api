@@ -5,7 +5,7 @@ import { Configuration } from './configuration.model';
 export class Products extends Entity {
 
   @property({
-    type: 'number',
+    type: 'string',
     id: true,
     generated: true,
   })

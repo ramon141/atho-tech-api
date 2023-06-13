@@ -3,7 +3,7 @@ import { Entity, model, property } from '@loopback/repository';
 @model()
 export class Budget extends Entity {
   @property({
-    type: 'number',
+    type: 'string',
     id: true,
     generated: true,
   })

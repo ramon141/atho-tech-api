@@ -8,7 +8,7 @@ import { Payments } from './payments.model';
 @model()
 export class Enterprise extends Entity {
   @property({
-    type: 'number',
+    type: 'string',
     id: true,
     generated: true,
   })

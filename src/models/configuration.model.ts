@@ -3,7 +3,7 @@ import { Entity, model, property } from '@loopback/repository';
 @model()
 export class Configuration extends Entity {
   @property({
-    type: 'number',
+    type: 'string',
     id: true,
     generated: true,
   })
@@ -23,9 +23,9 @@ export class Configuration extends Entity {
   value: number;
 
   @property({
-    type: 'number',
+    type: 'string',
   })
-  productsId?: number;
+  productsId?: string;
 
   constructor(data?: Partial<Configuration>) {
     super(data);

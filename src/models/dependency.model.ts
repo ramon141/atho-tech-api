@@ -4,17 +4,17 @@ import { Configuration } from './configuration.model';
 @model()
 export class Dependency extends Entity {
   @property({
-    type: 'number',
+    type: 'string',
     id: true,
     generated: true,
   })
   id?: string;
 
   @property({
-    type: 'number',
+    type: 'string',
     required: true,
   })
-  depends_on: number;
+  depends_on: string;
 
   @property({
     type: 'string',
@@ -43,7 +43,7 @@ export class Dependency extends Entity {
   configuration: Configuration;
 
   @belongsTo(() => Configuration)
-  configurationId: number;
+  configurationId: string;
 
   constructor(data?: Partial<Dependency>) {
     super(data);
