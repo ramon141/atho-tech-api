@@ -55,6 +55,34 @@ export const EnterpriseRequestBody = {
   },
 };
 
+const EnterprisePutSchema: SchemaObject = {
+  type: 'object',
+  required: ['email', 'name', 'password', 'olderPassword'],
+  properties: {
+    email: {
+      type: 'string',
+      format: 'email',
+    },
+    name: {
+      type: 'string',
+    },
+    password: {
+      type: 'string',
+      minLength: 8,
+    },
+    olderPassword: {
+      type: 'string',
+    },
+  },
+};
+
+export type EnterprisePut = {
+  email: string;
+  name: string;
+  password: string;
+  olderPassword: string;
+};
+
 export class EnterpriseController {
   constructor(
     @inject(TokenServiceBindings.TOKEN_SERVICE)
@@ -148,78 +176,36 @@ export class EnterpriseController {
     return this.enterpriseRepository.findById(id, filter);
   }
 
-  @patch('/enterprises/{id}')
-  @response(204, {
-    description: 'Enterprise PATCH success',
-  })
-  async updateById(
-    @param.path.string('id') id: string,
-    @requestBody({
-      content: {
-        'application/json': {
-          schema: getModelSchemaRef(Enterprise, { partial: true }),
-        },
-      },
-    })
-    enterprise: Enterprise,
-  ): Promise<void> {
-    await this.enterpriseRepository.updateById(id, enterprise);
-  }
-
   @put('/enterprises/{id}')
   @response(204, {
     description: 'Enterprise PUT success',
   })
   async replaceById(
     @param.path.string('id') id: string,
-    @requestBody() enterprise: Enterprise,
-  ): Promise<void> {
-    await this.enterpriseRepository.replaceById(id, enterprise);
-  }
-
-  @post('/enterprise/login', {
-    responses: {
-      '200': {
-        description: 'Token',
-        content: {
-          'application/json': {
-            schema: {
-              type: 'object',
-              properties: {
-                token: {
-                  type: 'string',
-                },
-              },
-            },
-          },
-        },
+    @requestBody({
+      description: 'Update info about enterprises',
+      required: true,
+      content: {
+        'application/json': { schema: EnterprisePutSchema },
       },
-    },
-  })
-  async signIn(
-    @requestBody(EnterpriseRequestBody) credentials: Credentials,
-  ): Promise<{ token: string, name: string, email: string }> {
+    }) data: EnterprisePut
+  ): Promise<Enterprise> {
+    const { olderPassword, name, password, email } = data;
+    const enterprise = await this.enterpriseRepository.findById(id);
 
-    const user = await this.enterpriseRepository.findOne({
-      where: {
-        email: credentials.email
-      }
-    });
+    if (!enterprise)
+      throw new HttpErrors[401]('Empresa não encontrada');
 
-    if (!user?.password || credentials.password != user.password)
-      throw new HttpErrors[401]('E-mail ou senha inválido(s)');
+    if (enterprise.password !== olderPassword)
+      throw new HttpErrors[401]('A senha anterior está incorreta!');
 
-    const userProfile = {
-      [securityId]: user.email!.toString(),
-      name: user.name
-    };
+    enterprise.name = name;
+    enterprise.password = password;
+    enterprise.email = email;
 
-    const token = await this.jwtService.generateToken(userProfile);
-    return {
-      token,
-      name: user.name,
-      email: user.email
-    };
+    await this.enterpriseRepository.replaceById(id, enterprise);
+
+    return enterprise;
   }
 
   @del('/enterprises/{id}')

@@ -32,6 +32,13 @@ export class Enterprise extends Entity {
   })
   name: string;
 
+  @property({
+    type: 'number',
+    required: false,
+    default: 2000,
+  })
+  budget: string;
+
   @hasMany(() => Products)
   products: Products[];
 
