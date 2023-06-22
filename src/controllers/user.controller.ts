@@ -22,6 +22,7 @@ import {
 } from '@loopback/rest';
 import { SecurityBindings, securityId, UserProfile } from '@loopback/security';
 import { compareSync, genSalt, hash } from 'bcryptjs';
+import { EnterpriseRepository } from '../repositories';
 
 @model()
 export class CreateUser extends User {
@@ -64,6 +65,7 @@ export class UserController {
     @inject(SecurityBindings.USER, { optional: true })
     public user: UserProfile,
     @repository(UserRepository) protected userRepository: UserRepository,
+    @repository(EnterpriseRepository) protected enterpriseRepository: EnterpriseRepository,
   ) { }
 
   @post('/signup', {
@@ -132,11 +134,37 @@ export class UserController {
 
   async signIn(
     @requestBody(RequestBody) credentials: Credentials,
-  ): Promise<{ token: string, role: string, name: string, email: string }> {
+  ): Promise<{ token: string, role: string, name: string, email: string, enterpriseId: string }> {
+
+    const enterprise = await this.enterpriseRepository.findOne({
+      where: {
+        email: credentials.email
+      }
+    });
+
+    if (enterprise && enterprise.id) {
+      if (credentials.password !== enterprise.password)
+        throw new HttpErrors[401]('E-mail e/ou senha inválido(s)');
+
+      const enterpriseProfile = {
+        [securityId]: enterprise.email!.toString(),
+        name: enterprise.name
+      };
+
+      const token = await this.jwtService.generateToken(enterpriseProfile);
+      return {
+        token,
+        role: "Admin",
+        name: enterprise.name,
+        email: enterprise.email,
+        enterpriseId: enterprise.id
+      };
+    }
+
     const user = await this.userRepository.findById(credentials.email);
 
     if (!compareSync(credentials.password, user.password))
-      throw new HttpErrors[401]('E-mail ou senha inválido(s)');
+      throw new HttpErrors[401]('E-mail e/ou senha inválido(s)');
 
     const userProfile = {
       [securityId]: user.email!.toString(),
@@ -148,7 +176,8 @@ export class UserController {
       token,
       role: user.role,
       name: user.name,
-      email: user.email
+      email: user.email,
+      enterpriseId: user.enterpriseId
     };
   }
 

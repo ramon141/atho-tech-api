@@ -16,9 +16,14 @@ export class Payments extends Entity {
   date: string;
 
   @property({
-    type: 'boolean'
+    type: 'string'
   })
-  success: boolean;
+  status: string;
+
+  @property({
+    type: 'string'
+  })
+  id_payment: string;
 
   @property({
     type: 'string',

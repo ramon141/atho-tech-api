@@ -16,7 +16,7 @@ export class Enterprise extends Entity {
 
   @property({
     type: 'string',
-    required: true,
+    required: true
   })
   email: string;
 
@@ -33,11 +33,22 @@ export class Enterprise extends Entity {
   name: string;
 
   @property({
+    type: 'string',
+    required: true,
+  })
+  cpf: string;
+
+  @property({
     type: 'number',
     required: false,
     default: 2000,
   })
-  budget: string;
+  budget: number;
+
+  @property({
+    type: 'date',
+  })
+  expire_date: string;
 
   @hasMany(() => Products)
   products: Products[];

@@ -109,6 +109,15 @@ export class EnterpriseController {
     })
     enterprise: Omit<Enterprise, 'id'>,
   ): Promise<Enterprise> {
+    const enterpriseExists = await this.enterpriseRepository.findOne({
+      where: {
+        email: enterprise.email
+      }
+    });
+
+    if (enterpriseExists)
+      throw new HttpErrors[401]('Uma empresa com o mesmo email foi cadastrada');
+
     return this.enterpriseRepository.create(enterprise);
   }
 
@@ -176,6 +185,40 @@ export class EnterpriseController {
     return this.enterpriseRepository.findById(id, filter);
   }
 
+  @get('/enterprises/{id}/budget')
+  @response(200, {
+    description: 'Enterprise model instance',
+    content: {
+      'application/json': {
+        schema: getModelSchemaRef(Enterprise, { includeRelations: true }),
+      },
+    },
+  })
+  async getBudget(
+    @param.path.string('id') id: string,
+  ): Promise<{ budget: number }> {
+    return {
+      budget: (await this.enterpriseRepository.findById(id)).budget
+    };
+  }
+
+  @get('/enterprises/{id}/increment_budget')
+  @response(200, {
+    description: 'Enterprise model instance',
+    content: {
+      'application/json': {
+        schema: getModelSchemaRef(Enterprise, { includeRelations: true }),
+      },
+    },
+  })
+  async incrementBudget(
+    @param.path.string('id') id: string,
+  ): Promise<void> {
+    const { id: ignore, ...enterprise } = await this.enterpriseRepository.findById(id);
+    enterprise.budget++;
+    this.enterpriseRepository.updateById(id, enterprise);
+  }
+
   @put('/enterprises/{id}')
   @response(204, {
     description: 'Enterprise PUT success',
@@ -207,6 +250,48 @@ export class EnterpriseController {
 
     return enterprise;
   }
+
+  @authenticate('jwt')
+  @get('/enterprise/whoami', {
+    responses: {
+      '200': {
+        description: 'Return current user',
+        content: {
+          'application/json': {
+            schema: {
+              type: 'string',
+            },
+          },
+        },
+      },
+    },
+  })
+  async whoAmI(
+    @inject(SecurityBindings.USER)
+    loggedInUserProfile: UserProfile,
+  ): Promise<{ id?: string | undefined, email: string, name: string, budget: number, quantUsers: number, quantProducts: number, quantServices: number }> {
+    const email = loggedInUserProfile[securityId];
+
+    const enterprise = await this.enterpriseRepository.findOne({
+      where: {
+        email: email
+      },
+      include: ['users', 'products', 'services']
+    });
+
+    if (!enterprise || !enterprise.id)
+      throw new HttpErrors[401]('O email não foi cadastrado!');
+
+    const { password, ...rest } = enterprise;
+
+    return {
+      ...rest,
+      quantUsers: enterprise.users?.length || 0,
+      quantProducts: enterprise.products?.length || 0,
+      quantServices: enterprise.services?.length || 0,
+    };
+  }
+
 
   @del('/enterprises/{id}')
   @response(204, {

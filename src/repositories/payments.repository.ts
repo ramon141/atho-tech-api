@@ -9,7 +9,7 @@ export class PaymentsRepository extends DefaultCrudRepository<
   PaymentsRelations
 > {
   constructor(
-    @inject('datasources.mongodb') dataSource: MysqlDataSource,
+    @inject('datasources.mysql') dataSource: MysqlDataSource,
   ) {
     super(Payments, dataSource);
   }

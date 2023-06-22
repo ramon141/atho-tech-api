@@ -60,8 +60,10 @@
     "@loopback/rest-explorer": "^5.0.4",
     "@loopback/security": "^0.8.4",
     "@loopback/service-proxy": "^5.0.4",
+    "axios": "^1.4.0",
     "loopback-connector-mongodb": "^7.0.0-alpha.1",
     "loopback-connector-postgresql": "^6.0.2",
+    "moment": "^2.29.4",
     "postgres": "^3.3.3",
     "tslib": "^2.0.0"
   },

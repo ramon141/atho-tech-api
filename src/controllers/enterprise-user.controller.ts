@@ -121,7 +121,7 @@ export class EnterpriseUserController {
   })
   async signIn(
     @requestBody(RequestBodyEnterprise) credentials: Credentials,
-  ): Promise<{ token: string, name: string, email: string, id: string }> {
+  ): Promise<{ token: string, name: string, email: string, id: string, cpf: string }> {
     const enterprise = await this.enterpriseRepository.findOne({
       where: {
         email: credentials.email
@@ -144,7 +144,8 @@ export class EnterpriseUserController {
       token,
       name: enterprise.name,
       email: enterprise.email,
-      id: enterprise.id
+      id: enterprise.id,
+      cpf: enterprise.cpf
     };
   }
 

@@ -30,8 +30,9 @@ export class User extends Entity {
 
   @property({
     type: 'string',
+    required: true,
   })
-  enterpriseId?: string;
+  enterpriseId: string;
   // Define well-known properties here
 
   // Indexer property to allow additional data
