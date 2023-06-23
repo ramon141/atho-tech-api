@@ -16,3 +16,5 @@ export * from './enterprise-user.controller';
 export * from './enterprise-services.controller';
 export * from './enterprise-kits.controller';
 export * from './enterprise-payments.controller';
+export * from './enterprise-configuration.controller';
+export * from './enterprise-dependency.controller';

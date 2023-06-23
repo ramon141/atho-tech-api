@@ -4,6 +4,8 @@ import { User } from './user.model';
 import { Services } from './services.model';
 import { Kits } from './kits.model';
 import { Payments } from './payments.model';
+import {Configuration} from './configuration.model';
+import {Dependency} from './dependency.model';
 
 @model()
 export class Enterprise extends Entity {
@@ -64,6 +66,12 @@ export class Enterprise extends Entity {
 
   @hasMany(() => Payments)
   payments: Payments[];
+
+  @hasMany(() => Configuration)
+  configurations: Configuration[];
+
+  @hasMany(() => Dependency)
+  dependencies: Dependency[];
 
   constructor(data?: Partial<Enterprise>) {
     super(data);

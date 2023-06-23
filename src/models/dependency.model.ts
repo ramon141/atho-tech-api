@@ -45,6 +45,11 @@ export class Dependency extends Entity {
   @belongsTo(() => Configuration)
   configurationId: string;
 
+  @property({
+    type: 'string',
+  })
+  enterpriseId?: string;
+
   constructor(data?: Partial<Dependency>) {
     super(data);
   }

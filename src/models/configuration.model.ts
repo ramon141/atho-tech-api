@@ -27,6 +27,11 @@ export class Configuration extends Entity {
   })
   productsId?: string;
 
+  @property({
+    type: 'string',
+  })
+  enterpriseId?: string;
+
   constructor(data?: Partial<Configuration>) {
     super(data);
   }
