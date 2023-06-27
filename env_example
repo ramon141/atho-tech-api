@@ -1,3 +1,5 @@
 MONGO_URL=mongodb://172.17.0.1:27017/athotech
 PORT=3001
 IP_DOCKER=172.17.0.1
+PRIV_TOKEN_MERCADO_PAGO=<token>
+CALLBACK_CONFIRM=https://<endereco>/payments/confirm
