@@ -15,7 +15,7 @@ Este comando realiza as seguintes funções:
 - Inicia o container com o código da api.
 
 # Variáveis de ambiente:
-PRIV_TOKEN_MERCADO_PAGO: Crie um token de pagamento do mercado pago: https://www.mercadopago.com.br/developers/pt
+PRIV_TOKEN_MERCADO_PAGO: Crie um token de pagamento do mercado pago: https://oimark.com.br/base-de-conhecimento/como-gerar-o-token-da-mercado-pago/
 
 CALLBACK_CONFIRM: Altere de acordo com o link de onde o servidor está hospedado. Utilize o ngrok para usar localmente.
 
